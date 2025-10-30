@@ -8,22 +8,26 @@
 
 import { navItemType } from "@/types/navItemType";
 
-
+// Courses | Tutorials | Blog | About | Contact | Login/Signup
 export const navItems: navItemType[] = [
     {
         name: "Courses",
         path: "/courses"
     },
     {
-        name:"Challenges",
-        path: "/challenges"
+        name:"Tutorials",
+        path: "/tutorials"
     },
     {
-        name: "Forum",
-        path: "/forum"
+        name: "Blog",
+        path: "/blog"
     },
     {
-        name: "Recources",
-        path: "/recources"
+        name: "About",
+        path: "/about"
+    },
+    {
+        name: "Contact",
+        path: "/contact"
     }
 ];
