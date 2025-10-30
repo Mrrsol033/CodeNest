@@ -1,0 +1,71 @@
+.socialList {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 15px;
+}
+
+.socialList li {
+  list-style: none;
+}
+
+.socialList li a {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border: 2px solid #3F00FF;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 22px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 10px rgba(63, 0, 255, 0.15);
+}
+
+.socialList li a::before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: 0.4s;
+  z-index: 1;
+}
+
+.socialList li:nth-child(1) a::before {
+  background: #1877f2; /* Facebook */
+}
+.socialList li:nth-child(2) a::before {
+  background: #1da1f2; /* Twitter */
+}
+.socialList li:nth-child(3) a::before {
+  background: #e4405f; /* Instagram */
+}
+.socialList li:nth-child(4) a::before {
+  background: #4b3f42; /* Github */
+}
+
+.socialList li a:hover::before {
+  top: 0;
+}
+
+.socialList li a:hover {
+  color: #fff;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 18px rgba(63, 0, 255, 0.3);
+}
+
+.icon {
+  color: #3F00FF;
+  z-index: 2;
+  transition: transform 0.5s ease, color 0.5s ease;
+}
+
+.socialList li a:hover .icon {
+  color: #fff;
+  transform: rotateY(360deg);
+}

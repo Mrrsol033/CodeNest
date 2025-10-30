@@ -1,0 +1,19 @@
+.animatedUnderline {
+  position: relative;
+  display: inline-block;
+}
+
+.animatedUnderline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #4f46e5; /* Tailwind indigo-600 */
+  transition: width 0.3s ease;
+}
+
+.animatedUnderline:hover::after {
+  width: 100%;
+}
