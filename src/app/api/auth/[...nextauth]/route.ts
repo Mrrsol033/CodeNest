@@ -1,6 +1,3 @@
-
-
-
 import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
@@ -13,27 +10,57 @@ export const authOptions = {
       clientSecret: process.env.GITHUB_SECRET ?? '',
     }),
     GoogleProvider({
-      clientId: process.env.GOOGLE_ID ?? '',
-      clientSecret: process.env.GOOGLE_SECRET ?? '',
+      clientId: process.env.GOOGLE_CLIENT_ID ?? '',
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? '',
     }),
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
         email: { label: "Email", type: "text", placeholder: "jsmith@example.com" },
-        password: {  label: "Password", type: "password" }
+        password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        // Add your own authentication logic here
-        // For now, we'll use a mock user
-        if (credentials?.email === "user@example.com" && credentials?.password === "password") {
-          return { id: "1", name: "J Smith", email: "user@example.com" }
+        // Add your authentication logic here
+        // This is a mock - replace with real database check
+        if (credentials?.email === "demo123@gmail.com" && credentials?.password === "demo123") {
+          return { 
+            id: "1", 
+            name: "Demo User", 
+            email: "demo123@gmail.com",
+            image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+          }
         }
+        
+        // If credentials are invalid
         return null
       }
     })
   ],
+  callbacks: {
+    async session({ session, token }) {
+      // Send properties to the client
+      if (session.user) {
+        session.user.id = token.sub!
+      }
+      return session
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+      }
+      return token
+    }
+  },
+  pages: {
+    signIn: '/login',
+    signOut: '/',
+    error: '/login',
+  },
+  session: {
+    strategy: 'jwt' as const,
+  },
 }
 
-export const handler = NextAuth(authOptions)
+const handler = NextAuth(authOptions)
 
 export { handler as GET, handler as POST }
