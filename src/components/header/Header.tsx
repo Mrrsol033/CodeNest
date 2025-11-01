@@ -6,18 +6,26 @@ import styles from "./style.module.css";
 import { navItems } from "@/data/navItem";
 import { useAuth } from "@/hooks/useAuth";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
   const { user, signOut, isLoading } = useAuth();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const router = useRouter();
 
   const handleSignOut = async () => {
     try {
       await signOut();
       setIsDropdownOpen(false);
+      router.push('/');
     } catch (error) {
       console.error('Sign out error:', error);
     }
+  };
+
+  const handleNavigation = (path: string) => {
+    setIsDropdownOpen(false);
+    router.push(path);
   };
 
   // Don't show auth state while loading
@@ -104,9 +112,9 @@ export default function Header() {
                     </span>
                   </div>
                 )}
-                <span className="text-sm font-medium text-gray-700 hidden sm:block">
+                {/* <span className="text-sm font-medium text-gray-700 hidden sm:block">
                   {user.name}
-                </span>
+                </span> */}
                 <svg
                   className={`h-4 w-4 text-gray-500 transition-transform ${
                     isDropdownOpen ? 'rotate-180' : ''
@@ -129,27 +137,24 @@ export default function Header() {
                   </div>
                   
                   {/* Menu Items */}
-                  <Link
-                    href="/profile"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setIsDropdownOpen(false)}
+                  <button
+                    onClick={() => handleNavigation('/profile')}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     Your Profile
-                  </Link>
-                  <Link
-                    href="/dashboard"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setIsDropdownOpen(false)}
+                  </button>
+                  <button
+                    onClick={() => handleNavigation('/dashboard')}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     Dashboard
-                  </Link>
-                  <Link
-                    href="/settings"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                    onClick={() => setIsDropdownOpen(false)}
+                  </button>
+                  <button
+                    onClick={() => handleNavigation('/dashboard/settings')}
+                    className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                   >
                     Settings
-                  </Link>
+                  </button>
                   
                   {/* Sign Out */}
                   <div className="border-t border-gray-100 mt-2 pt-2">
