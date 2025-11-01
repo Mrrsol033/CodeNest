@@ -1,7 +1,7 @@
-export default function TutorialPage ({title}: {title: string}){
+export default function TutorialPage (){
 
     return (
 
-        <h1>{title}</h1>
+        <h1></h1>
     )
 }

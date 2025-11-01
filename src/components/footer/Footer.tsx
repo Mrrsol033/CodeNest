@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Github } from "lucide-react";
 
 export default function Footer() {
     return (
-        <footer className="bg-gradient-to-br from-indigo-900 via-indigo-800 to-indigo-950 text-white py-12">
+        <footer className="bg-linear-to-br from-indigo-900 via-indigo-800 to-indigo-950 text-white py-12">
             <div className="container mx-auto px-4">
                 {/* Grid Section */}
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

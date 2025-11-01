@@ -8,7 +8,7 @@ export default function NotFound() {
     <>
       {/* Include Header for consistent navigation */}
 
-      <main className="flex min-h-[99vh] flex-col items-center justify-center bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 px-6 text-center">
+      <main className="flex min-h-[99vh] flex-col items-center justify-center bg-linear-to-br from-indigo-50 via-purple-50 to-pink-50 px-6 text-center">
         <Image
           src="https://cdni.iconscout.com/illustration/premium/thumb/error-404-page-not-available-illustration-svg-download-png-7706458.png"
           alt="404 Not Found Illustration"

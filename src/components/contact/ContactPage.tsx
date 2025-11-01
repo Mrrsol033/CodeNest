@@ -1,6 +1,6 @@
-export default function ContactPage ({title}: {title: string}) {
+export default function ContactPage () {
     return (
 
-        <h1>{title}</h1>
+        <h1></h1>
     )
 }

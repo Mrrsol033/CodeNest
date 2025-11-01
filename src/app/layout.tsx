@@ -5,7 +5,8 @@ import { Suspense } from "react";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import Loading from "./loading";
-import { Providers } from "./providers";
+import { Providers } from "./provider";
+import AuthProvider from "@/components/context/AuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,9 +46,12 @@ export default function RootLayout({
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Suspense fallback={<Loading />}>
           <Providers>
-            <Header />
-            {children}
-            <Footer />
+            <AuthProvider>
+
+               <Header />
+               {children}
+              <Footer />
+            </AuthProvider>
           </Providers>
 
         </Suspense>

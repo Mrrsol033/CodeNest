@@ -9,7 +9,7 @@ const courses = [
 
 export default function CourseList() {
   return (
-    <div className="grid md:grid-cols-3 gap-6">
+    <div className="grid md:grid-cols-3 gap-6 bg-gray-50">
       {courses.map((c) => (
         <CourseCard key={c.title} {...c} />
       ))}

@@ -5,7 +5,7 @@ const testimonials = [
 
 export default function Testimonials() {
   return (
-    <section className="py-16 bg-gray-100 text-center">
+    <section className="bg-gray-100 text-center py-12">
       <h2 className="text-3xl font-bold mb-8">What Our Learners Say</h2>
       <div className="flex flex-col md:flex-row justify-center gap-8">
         {testimonials.map((t) => (

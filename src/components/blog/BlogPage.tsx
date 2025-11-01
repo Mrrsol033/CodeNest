@@ -1,5 +1,5 @@
-export default function BlogPage ({title}: {title: string}) {
+export default function BlogPage () {
     return (
-        <h1>{title}</h1>
+        <h1></h1>
     )
 }

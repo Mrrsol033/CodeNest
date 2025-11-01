@@ -1,7 +1,5 @@
-export type authType {
+export type authType = {
 
     password: string,
-    
-
 
 }
