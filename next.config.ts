@@ -4,10 +4,24 @@ const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
    images: {
-    domains: ["cdni.iconscout.com",
-    "images.unsplash.com",
-    "cdn.pixabay.com",
-    "img.freepik.com",], // add more domains if needed
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdni.iconscout.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cdn.pixabay.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'img.freepik.com',
+      },
+    ],
   },
 };
 
