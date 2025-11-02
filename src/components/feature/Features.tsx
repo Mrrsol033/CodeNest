@@ -69,7 +69,7 @@ export default function Features() {
   };
 
   return (
-    <section id="features" className="py-20  bg-gray-50 relative overflow-hidden">
+    <section id="features" className="py-20  bg-gradient-to-br from-[#fdfbfb] to-[#ebedee] relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
