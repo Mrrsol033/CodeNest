@@ -6,7 +6,7 @@ import CourseList from '@/components/coursesList/CourseList';
 
 export default function Courses() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },

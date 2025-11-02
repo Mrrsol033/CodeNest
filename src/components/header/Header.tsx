@@ -59,8 +59,8 @@ export default function Header() {
     return (
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-xl shadow-lg border-b border-primary-100' 
-          : 'bg-white/90 backdrop-blur-lg'
+          ? 'bg-white/45 backdrop-blur-xl shadow-lg border-b border-primary-100' 
+          : 'bg-white/40 backdrop-blur-lg'
       }`}>
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo Skeleton */}
@@ -261,9 +261,9 @@ export default function Header() {
                 >
                   <Link
                     href="/signup"
-                    className="bg-primary-500 hover:bg-primary-600 text-white px-6 py-2.5 rounded-xl text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-primary-500 hover:bg-primary-600 text-gray-700 px-6 py-2.5 rounded-xl text-sm font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    Get Started
+                    Sign up
                   </Link>
                 </motion.div>
               </motion.div>
@@ -341,7 +341,7 @@ export default function Header() {
                       onClick={() => handleNavigation('/signup')}
                       className="block w-full text-center py-3 px-4 text-base font-semibold text-white bg-primary-500 hover:bg-primary-600 rounded-xl shadow-lg hover:shadow-xl transition-all"
                     >
-                      Get Started
+                      Sign up
                     </button>
                   </div>
                 )}
