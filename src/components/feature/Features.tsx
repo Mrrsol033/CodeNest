@@ -1,208 +1,142 @@
 "use client";
 
-import { motion, useInView, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
-import { useRef, useState, useEffect } from "react";
-import styles from "./style.module.css";
+import { motion, useInView } from 'framer-motion';
+import { useRef } from 'react';
 
 const features = [
   {
-    title: "Interactive Coding Challenges",
-    description:
-      "Practice real-world coding problems designed to help you master algorithms and data structures.",
-    image:
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=800&q=80",
+    icon: "🚀",
+    title: "Interactive Learning",
+    description: "Hands-on coding exercises with instant feedback and real-time collaboration.",
+    color: "from-blue-500 to-cyan-500",
   },
   {
-    title: "Structured Learning Paths",
-    description:
-      "Follow guided roadmaps that take you from beginner to advanced step by step.",
-    image:
-      "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=800&q=80",
+    icon: "💻",
+    title: "Real Projects",
+    description: "Build portfolio-worthy projects that simulate real-world development scenarios.",
+    color: "from-purple-500 to-pink-500",
   },
   {
+    icon: "👨‍🏫",
+    title: "Expert Mentors",
+    description: "Learn from industry professionals with years of practical experience.",
+    color: "from-green-500 to-teal-500",
+  },
+  {
+    icon: "📊",
+    title: "Progress Tracking",
+    description: "Monitor your learning journey with detailed analytics and milestones.",
+    color: "from-orange-500 to-red-500",
+  },
+  {
+    icon: "🤝",
     title: "Community Support",
-    description:
-      "Join a passionate community of learners to share ideas, solve problems, and grow together.",
-    image:
-      "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=80",
+    description: "Join a vibrant community of learners and get help when you need it.",
+    color: "from-indigo-500 to-blue-500",
+  },
+  {
+    icon: "🎯",
+    title: "Career Paths",
+    description: "Structured learning paths designed to get you job-ready in months.",
+    color: "from-yellow-500 to-orange-500",
   },
 ];
 
-/* -------------------------------------------------
-   REUSABLE CARD
-------------------------------------------------- */
-type CardProps = {
-  index: number;
-  total: number;
-  feature: typeof features[number];
-};
-
-function FeatureCard({ index, total, feature }: CardProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-150px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      className={styles.cardWrapper}
-      style={{ zIndex: index }}
-      initial={{ opacity: 0, scale: 0.85 }}
-      animate={isInView ? { opacity: 1, scale: 1 } : {}}
-      transition={{ duration: 0.6, ease: "easeOut" }}
-    >
-      <div
-        className={`${styles.glassCard} ${
-          index % 2 === 1 ? styles.reverse : ""
-        }`}
-      >
-        {/* Image */}
-        <motion.div
-          className={styles.imageContainer}
-          whileHover={{ scale: 1.03 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Image
-            src={feature.image}
-            alt={feature.title}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover"
-          />
-          <div className={styles.imageOverlay} />
-        </motion.div>
-
-        {/* Text */}
-        <motion.div
-          className={styles.textContainer}
-          initial={{ opacity: 0, x: index % 2 === 1 ? -80 : 80 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.7, delay: 0.2 }}
-        >
-          <h3 className={styles.title}>{feature.title}</h3>
-          <p className={styles.description}>{feature.description}</p>
-
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className={styles.heroButton}
-          >
-            Learn More
-          </motion.button>
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-}
-
-/* -------------------------------------------------
-   MAIN SECTION – Scroll-Driven Sticky Effect (Framer Motion)
-------------------------------------------------- */
 export default function Features() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const stickyRef = useRef<HTMLDivElement>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+      },
+    },
+  };
 
-  // We'll create a smooth step for each card
-  const cardProgress = useTransform(
-    scrollYProgress,
-    (p) => {
-      const step = 1 / (features.length - 1);
-      const current = Math.floor(p / step);
-      const local = (p % step) / step;
-      return { current, local };
-    }
-  );
-
-  useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768);
-    check();
-    window.addEventListener("resize", check);
-    return () => window.removeEventListener("resize", check);
-  }, []);
+  const itemVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut",
+      },
+    },
+  };
 
   return (
-    <section
-      ref={containerRef}
-      className={styles.section}
-      style={{ height: isMobile ? "auto" : `${features.length * 100}vh` }}
-    >
-      {/* Glass Background */}
-      <motion.div
-        className={styles.glassBg}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.2 }}
-      />
-
-      {/* Sticky Wrapper */}
-      <div
-        ref={stickyRef}
-        className={`${isMobile ? "static" : "sticky top-0"} ${styles.stickyWrapper}`}
-      >
-        {features.map((f, i) => {
-          const isActive = i === cardProgress.get().current;
-          const local = cardProgress.get().local;
-
-          // Only apply scroll animation on desktop
-          const shouldAnimate = !isMobile && features.length > 1;
-
-          const scale = shouldAnimate
-            ? isActive
-              ? 1
-              : 0.82
-            : 1;
-
-          const rotate = shouldAnimate
-            ? isActive
-              ? 0
-              : (i % 2 === 0 ? -12 : 12) * (1 - local)
-            : 0;
-
-          const y = shouldAnimate
-            ? isActive
-              ? 0
-              : (i > cardProgress.get().current ? 120 : -120) * (1 - local)
-            : 0;
-
-          const opacity = shouldAnimate
-            ? isActive || Math.abs(i - cardProgress.get().current) === 1
-              ? 1
-              : 0
-            : 1;
-
-          return (
-            <motion.div
-              key={i}
-              className={styles.cardWrapper}
-              style={{
-                scale,
-                rotate,
-                y: `${y}%`,
-                opacity,
-                zIndex: i,
-              }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-              <FeatureCard index={i} total={features.length} feature={f} />
-            </motion.div>
-          );
-        })}
+    <section id="features" className="py-20  bg-gray-50 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }}></div>
       </div>
 
-      {/* Mobile Fallback */}
-      {isMobile && (
-        <div className={styles.mobileStack}>
-          {features.map((f, i) => (
-            <FeatureCard key={i} index={i} total={features.length} feature={f} />
+      <div className="container mx-auto px-6 relative z-10">
+        <motion.div
+          ref={ref}
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent mb-6">
+            Why Learn With CodeNest?
+          </h2>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            Discover the features that make CodeNest the most effective platform for mastering programming skills
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+        >
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="group relative"
+            >
+              {/* Card */}
+              <div className="relative bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100">
+                {/* Background Gradient on Hover */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-500`}></div>
+                
+                {/* Icon */}
+                <motion.div
+                  className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${feature.color} flex items-center justify-center text-2xl mb-6 mx-auto relative overflow-hidden`}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="absolute inset-0 bg-white opacity-10"></div>
+                  <span>{feature.icon}</span>
+                </motion.div>
+
+                {/* Content */}
+                <h3 className="text-2xl font-bold text-gray-800 mb-4 text-center">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 text-center leading-relaxed">
+                  {feature.description}
+                </p>
+
+                {/* Hover Border Effect */}
+                <div className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${feature.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10`}>
+                  <div className="absolute inset-[2px] bg-white rounded-2xl"></div>
+                </div>
+              </div>
+            </motion.div>
           ))}
-        </div>
-      )}
+        </motion.div>
+      </div>
     </section>
   );
 }
