@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const testimonials = [
   {
@@ -10,9 +10,10 @@ const testimonials = [
     role: "Frontend Developer",
     company: "TechCorp",
     image: "👩‍💻",
-    content: "CodeNest completely transformed my career. The React course gave me the skills to land my dream job at TechCorp. The projects were so relevant to real-world applications!",
+    content:
+      "CodeNest completely transformed my career. The React course gave me the skills to land my dream job at TechCorp. The projects were so relevant to real-world applications!",
     rating: 5,
-    course: "React Mastery"
+    course: "React Mastery",
   },
   {
     id: 2,
@@ -20,9 +21,10 @@ const testimonials = [
     role: "Full Stack Developer",
     company: "StartupXYZ",
     image: "👨‍💼",
-    content: "I went from zero coding experience to a full-time developer in 6 months. The structured learning path and mentor support made all the difference. Best investment ever!",
+    content:
+      "I went from zero coding experience to a full-time developer in 6 months. The structured learning path and mentor support made all the difference. Best investment ever!",
     rating: 5,
-    course: "Full Stack Development"
+    course: "Full Stack Development",
   },
   {
     id: 3,
@@ -30,9 +32,10 @@ const testimonials = [
     role: "Mobile Developer",
     company: "AppWorks",
     image: "👩‍🎨",
-    content: "The React Native course was exceptional. I built my first mobile app during the course and now I'm working at a top mobile development agency. Thank you CodeNest!",
+    content:
+      "The React Native course was exceptional. I built my first mobile app during the course and now I'm working at a top mobile development agency. Thank you CodeNest!",
     rating: 5,
-    course: "Mobile Development"
+    course: "Mobile Development",
   },
   {
     id: 4,
@@ -40,9 +43,10 @@ const testimonials = [
     role: "Data Scientist",
     company: "DataInsights",
     image: "👨‍🔬",
-    content: "The Python for Data Science course covered everything I needed. The projects were challenging but incredibly rewarding. I use what I learned every day at work.",
+    content:
+      "The Python for Data Science course covered everything I needed. The projects were challenging but incredibly rewarding. I use what I learned every day at work.",
     rating: 4,
-    course: "Data Science"
+    course: "Data Science",
   },
   {
     id: 5,
@@ -50,9 +54,10 @@ const testimonials = [
     role: "DevOps Engineer",
     company: "CloudSystems",
     image: "👩‍💻",
-    content: "The DevOps course was comprehensive and up-to-date with industry standards. The hands-on labs with AWS and Docker were particularly valuable for my current role.",
+    content:
+      "The DevOps course was comprehensive and up-to-date with industry standards. The hands-on labs with AWS and Docker were particularly valuable for my current role.",
     rating: 5,
-    course: "DevOps & Cloud"
+    course: "DevOps & Cloud",
   },
   {
     id: 6,
@@ -60,83 +65,66 @@ const testimonials = [
     role: "Backend Developer",
     company: "API Masters",
     image: "👨‍💻",
-    content: "Node.js course was fantastic! The instructors were knowledgeable and the community support was amazing. I went from beginner to backend developer in months.",
+    content:
+      "Node.js course was fantastic! The instructors were knowledgeable and the community support was amazing. I went from beginner to backend developer in months.",
     rating: 5,
-    course: "Node.js Backend"
-  }
+    course: "Node.js Backend",
+  },
 ];
 
 export default function TestimonialsPage() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: false, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "-150px" }); // ✅ Fix: run animation once only
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.2 },
     },
   };
 
   const itemVariants = {
-    hidden: { 
-      opacity: 0, 
-      y: 50,
-      scale: 0.9
-    },
+    hidden: { opacity: 0, y: 60, scale: 0.95 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: {
-        duration: 0.8,
-        ease: "easeOut",
-      },
+      transition: { duration: 0.7, ease: [0.25, 0.1, 0.25, 1] },
     },
   };
 
-  const renderStars = (rating: number) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <span
-        key={i}
-        className={`text-lg ${
-          i < rating ? "text-yellow-400" : "text-gray-300"
-        }`}
-      >
-        ★
-      </span>
-    ));
-  };
+  const renderStars = (rating: number) => (
+    <>
+      {Array.from({ length: 5 }, (_, i) => (
+        <span
+          key={i}
+          className={`text-lg ${i < rating ? "text-yellow-400" : "text-gray-300"}`}
+        >
+          ★
+        </span>
+      ))}
+    </>
+  );
 
   return (
-    <section id="testimonials" className="py-20 bg-gradient-to-br from-purple-50 to-pink-50 relative overflow-hidden">
-      {/* Background Elements */}
+    <section
+      id="testimonials"
+      className="py-20 bg-gradient-to-br from-purple-50 to-pink-50 relative overflow-hidden"
+    >
+      {/* Background Blobs */}
       <div className="absolute inset-0">
         <motion.div
-          className="absolute top-20 left-10 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
-          animate={{
-            scale: [1, 1.1, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear",
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.3, scale: [1, 1.1, 1], rotate: [0, 180, 360] }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-20 left-10 w-80 h-80 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl"
         />
         <motion.div
-          className="absolute bottom-20 right-10 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"
-          animate={{
-            scale: [1.1, 1, 1.1],
-            y: [0, -40, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.3, scale: [1.1, 1, 1.1], y: [0, -40, 0] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-20 right-10 w-96 h-96 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl"
         />
       </div>
 
@@ -146,12 +134,12 @@ export default function TestimonialsPage() {
           ref={ref}
           className="text-center mb-16"
           initial={{ opacity: 0, y: 50 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
           <motion.div
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.5, opacity: 0 }}
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={isInView ? { scale: 1, opacity: 1 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="inline-block mb-4"
           >
@@ -159,12 +147,13 @@ export default function TestimonialsPage() {
               💬 Student Success Stories
             </span>
           </motion.div>
-          
+
           <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-purple-800 to-pink-600 bg-clip-text text-transparent mb-6">
             What Our Students Say
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Join thousands of successful graduates who transformed their careers with CodeNest
+            Join thousands of successful graduates who transformed their careers
+            with CodeNest
           </p>
         </motion.div>
 
@@ -176,26 +165,20 @@ export default function TestimonialsPage() {
           animate={isInView ? "visible" : "hidden"}
         >
           {testimonials.map((testimonial) => (
-            <motion.div
-              key={testimonial.id}
-              variants={itemVariants}
-              className="group"
-            >
+            <motion.div key={testimonial.id} variants={itemVariants} className="group">
               <div className="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border border-gray-100 relative h-full flex flex-col">
-                {/* Quote Icon */}
-                <div className="text-4xl text-purple-200 mb-4">"</div>
-                
+                {/* Quote */}
+                <div className="text-4xl text-purple-200 mb-4"></div>
+
                 {/* Rating */}
-                <div className="flex mb-4">
-                  {renderStars(testimonial.rating)}
-                </div>
+                <div className="flex mb-4">{renderStars(testimonial.rating)}</div>
 
                 {/* Content */}
                 <p className="text-gray-700 text-lg leading-relaxed mb-6 flex-grow">
                   {testimonial.content}
                 </p>
 
-                {/* Course Taken */}
+                {/* Course */}
                 <div className="mb-6">
                   <span className="text-sm text-purple-600 font-semibold">
                     Course: {testimonial.course}
@@ -208,11 +191,13 @@ export default function TestimonialsPage() {
                   <div className="flex-1">
                     <h4 className="font-bold text-gray-800">{testimonial.name}</h4>
                     <p className="text-sm text-gray-600">{testimonial.role}</p>
-                    <p className="text-sm text-purple-600 font-semibold">{testimonial.company}</p>
+                    <p className="text-sm text-purple-600 font-semibold">
+                      {testimonial.company}
+                    </p>
                   </div>
                 </div>
 
-                {/* Hover Gradient Effect */}
+                {/* Hover Gradient */}
                 <div className="absolute inset-0 bg-gradient-to-br from-purple-500 to-pink-500 opacity-0 group-hover:opacity-5 rounded-3xl transition-opacity duration-500 -z-10"></div>
               </div>
             </motion.div>
@@ -223,7 +208,7 @@ export default function TestimonialsPage() {
         <motion.div
           className="text-center mt-16"
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
         >
           <p className="text-gray-600 mb-6 text-lg">
