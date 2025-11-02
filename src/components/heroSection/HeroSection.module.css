@@ -1,133 +1,136 @@
-/* src/components/HeroSection/HeroSection.module.css */
-.hero {
-  display: flex;
-  flex-direction: column;
+/* Hero Button Styles */
+.heroButton {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  align-items: flex-start;
-  padding: 4rem 2rem;
-  min-height: 90vh;
-  color: white;
-  position: relative;
+  padding: 1.25rem 3rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  overflow: hidden;
-}
-
-.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.15), transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15), transparent 50%);
-  z-index: 0;
-  transform: rotate(30deg);
-}
-
-.heroContent {
-  position: relative;
-  z-index: 1;
-  max-width: 600px;
-}
-
-.heroTitle {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.heroSubtitle {
+  color: white;
+  font-weight: 700;
   font-size: 1.25rem;
-  margin-bottom: 2rem;
-}
-
-.ctaButton {
-  background-color: #ff6363;
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s ease;
-}
-
-.ctaButton:hover {
-  background-color: #ff3b3b;
-  transform: translateY(-2px);
-}
-
-
-/* HeroSection.module.css */
-.button {
-  display: inline-block;
-  padding: 0.75rem 1.25rem;
-  border-radius: 7px;
-  color: #241f1f;
-  text-transform: uppercase;
-  font-size: 1rem;
-  letter-spacing: 0.15rem;
-  transition: all 0.3s;
-  position: relative;
+  border-radius: 1rem;
   overflow: hidden;
-  z-index: 1;
-  border: 2px solid #3F00FF; /* visible border */
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: 
+    0 10px 30px rgba(102, 126, 234, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: none;
 }
 
-.button::after {
-  content: '';
+.heroButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 20px 40px rgba(102, 126, 234, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.2);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.heroButton:active {
+  transform: translateY(-1px);
+  box-shadow: 
+    0 10px 20px rgba(102, 126, 234, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.buttonBackground {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: var(--btn-color);
-  border-radius: 4px;
-  z-index: -2;
-}
-
-.button::before {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0%;
-  height: 100%;
-  background-color: #3F00FF; /* hover fill */
-  transition: all 0.3s;
-  border-radius: 4px;
-  z-index: -1;
-}
-
-.button:hover {
-  color: #fff;
-  transition: 1s ease-in-out;
-}
-
-.button:hover::before {
-  width: 100%;
-}
-
-.button svg {
-  position: absolute;
-  left: 0;
   top: 0;
+  left: -100%;
   width: 100%;
   height: 100%;
-  fill: none;
-  stroke: #fff;
-  stroke-dasharray: 150 480;
-  stroke-dashoffset: 150;
-  transition: 1s ease-in-out;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.6s ease;
 }
 
-.button:hover svg {
-  stroke-dashoffset: -480;
+.heroButton:hover .buttonBackground {
+  left: 100%;
 }
 
-.button span {
-  position: relative;
-  color: white;
-  font-size: 18px;
-  font-weight: 100;
-  z-index: 1;
+/* Gradient Text Animation */
+.gradientText {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #5a67d8, #4c51bf);
+  background-size: 300% 300%;
+  animation: gradientShift 8s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  66% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+}
+
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse Animation for Live Indicator */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 5px rgba(72, 187, 120, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(72, 187, 120, 0.8);
+  }
+}
+
+.pulseGlow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Glass Morphism Utilities */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .heroButton {
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroButton {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
 }

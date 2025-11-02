@@ -17,3 +17,197 @@
 .animatedUnderline:hover::after {
   width: 100%;
 }
+/* Navigation Link Styles */
+.navLink {
+  position: relative;
+  padding: 8px 4px;
+  transition: all 0.3s ease;
+}
+
+.navLink:hover {
+  color: #4f46e5;
+  transform: translateY(-1px);
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.navLink:hover .underline {
+  width: 100%;
+}
+
+/* Active state for current page */
+.navLink.active {
+  color: #4f46e5;
+}
+
+.navLink.active .underline {
+  width: 100%;
+}
+
+/* Dropdown animation */
+.dropdownEnter {
+  opacity: 0;
+  transform: scale(0.95) translateY(-10px);
+}
+
+.dropdownEnterActive {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  transition: all 0.2s ease-out;
+}
+
+.dropdownExit {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.dropdownExitActive {
+  opacity: 0;
+  transform: scale(0.95) translateY(-10px);
+  transition: all 0.15s ease-in;
+}
+
+/* Mobile menu animations */
+.mobileMenuEnter {
+  opacity: 0;
+  max-height: 0;
+}
+
+.mobileMenuEnterActive {
+  opacity: 1;
+  max-height: 500px;
+  transition: all 0.3s ease-out;
+}
+
+.mobileMenuExit {
+  opacity: 1;
+  max-height: 500px;
+}
+
+.mobileMenuExitActive {
+  opacity: 0;
+  max-height: 0;
+  transition: all 0.25s ease-in;
+}
+
+/* Glass morphism effect */
+.glass {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Shimmer effect for loading */
+.shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Pulse animation for notifications */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .navLink {
+    padding: 6px 2px;
+    font-size: 0.875rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navLink {
+    padding: 4px 1px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Navigation Link Styles */
+.navLink {
+  position: relative;
+  padding: 8px 4px;
+  transition: all 0.3s ease;
+}
+
+.navLink:hover {
+  color: #0ea5e9; /* primary-500 */
+  transform: translateY(-1px);
+}
+
+.underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #0ea5e9, #3b82f6); /* primary-500 to blue-500 */
+  transition: width 0.3s ease;
+  border-radius: 2px;
+}
+
+.navLink:hover .underline {
+  width: 100%;
+}
+
+/* Active state for current page */
+.navLink.active {
+  color: #0ea5e9; /* primary-500 */
+}
+
+.navLink.active .underline {
+  width: 100%;
+}
+
+/* Glass morphism effect with primary colors */
+.glass {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(14, 165, 233, 0.1); /* primary-500 with opacity */
+}
+
+/* Primary color utilities */
+.bg-primary-gradient {
+  background: linear-gradient(135deg, #0ea5e9 0%, #3b82f6 100%);
+}
+
+.text-primary-gradient {
+  background: linear-gradient(135deg, #0ea5e9, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-primary-light {
+  border-color: rgba(14, 165, 233, 0.2);
+}

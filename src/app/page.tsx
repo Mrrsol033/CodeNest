@@ -4,14 +4,16 @@ import TestimonialsPage from "@/components/testimonials/TestimonialsPage";
 import Stats from "@/components/stats/Stats";
 
 
+
 export default function Home() {
   return (
-    <main className="flex flex-col">
+    <main className="flex flex-col relative">
       {/* Hero Section */}
       <HeroSection />
 
       {/* Features / Courses */}
       <Features />
+
 
       {/* Testimonials */}
       <TestimonialsPage />
