@@ -1,7 +1,9 @@
-//  icon, title, description 
-export type AboutPageType = {
-    icon: string,
-    title: string,
-    description:string,
-    children: string
+import { ReactNode } from "react";
+
+export interface AboutPageType {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  icon?: ReactNode;
+  children?: ReactNode;
 }
